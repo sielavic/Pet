@@ -1,0 +1,194 @@
+.margin{
+    margin-top: -38px;
+}
+.avtorization{
+    margin-top: 10px;
+    margin-right: 7px;
+}
+.modal-login{
+    padding: 50px;
+    background: #ccc;
+    position: fixed; top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#task_content{
+    margin: 10px;
+    padding: 17%;
+}
+#task_title{
+    margin-left: 10px;
+    width: 50%;
+    margin-top: 1%;
+}
+#task_assigneduserid{
+    margin-left: 2%;
+}
+#task_priority{
+    margin: 1%;
+}
+#task_hours{
+    margin: 1%;
+}
+#task_state{
+    margin: 1%;
+}
+#task_submit{
+    color: #fff;
+    background: #0d6efd;
+    border-color: #0d6efd;
+}
+.sign-up__container{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
+.container{
+    padding: 20px;
+    background-color: #f4f4f6;
+    border-radius: 16px;
+}
+.authorization__main {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    width: 236px;
+    margin: 0 auto;
+    flex-direction: column;
+}
+.form-component {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+}
+.plus {
+    margin-top: 3px;
+    display:inline-block;
+    width:40px;
+    height:40px;
+    background:
+            linear-gradient(#fff,#fff),
+            linear-gradient(#fff,#fff),
+            #b9a25b;
+    background-position:center;
+    background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+}
+
+.radius {
+    border-radius:50%;
+}
+.status-circle-green {
+    margin-right: 1px;
+    float: left;
+    width: 10px;
+    height: 10px;
+    background: #359f39;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    margin-top: 7px;
+}
+.status-circle-grey {
+    margin-right: 1px;
+    float: left;
+    width: 10px;
+    height: 10px;
+    background: #5a5d5a;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    margin-top: 7px;
+}
+.status-circle-blue {
+    margin-right: 1px;
+    float: left;
+    width: 10px;
+    height: 10px;
+    background: #357d9f;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    margin-top: 7px;
+}
+.gold{
+    background: #b9a25b;
+    border: double;
+}
+.icon-gear{
+    position: relative;
+    display: inline-block;
+    margin-top: 3px;
+    margin-right: 3px;
+    width: 40px;
+    height: 40px;
+    background-image: url('/public/image/icon-gear.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.icon-tasks{
+    position: relative;
+    display: inline-block;
+    margin-top: 3px;
+    margin-right: 3px;
+    width: 40px;
+    height: 40px;
+    background-image: url('/public/image/tasks.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.status-circle-red{
+    float: left;
+    width: 10px;
+    height: 10px;
+    background: #b72c2c;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    margin-top: 7px;
+}
+
+.man {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-top: 3px;
+    margin-right: 3px;
+    color: #b9a25b;
+}
+.man::before,
+.man::after {
+    content: "";
+    position: absolute;
+    background: currentColor; /* цвет иконки как цвет текста */
+}
+.man::before {
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    border-radius: 100%;
+}
+.man::after {
+    left: 0;
+    bottom: 0%;
+    width: 100%;
+    height: 40%;
+    border-radius: 100% 100% 0% 0%;
+}
+
+#cke_task_content{
+    width: fit-content;
+    margin: auto;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: #b9a25b;
+}

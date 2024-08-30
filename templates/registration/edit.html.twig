@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center">Редактирование пользователя</h1>
+    <div class="authorization__main">
+   <div class="sign-up__container">
+   <div class="container">
+
+    {{ form_errors(editForm) }}
+    <div class="form-component">
+    {{ form_start(editForm) }}
+        {{ form_row(editForm.name) }}
+        {{ form_row(editForm.surname) }}
+        {{ form_row(editForm.password, {
+            label: 'Пароль'
+        }) }}
+
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    {{ form_end(editForm) }}
+    </div>
+   </div>
+   </div>
+    </div>
+{% endblock %}

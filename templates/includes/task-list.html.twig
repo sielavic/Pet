@@ -1,0 +1,106 @@
+{% if(tasks|length >= 1) %}
+
+    {% if app.user %}
+        <div class="mb-3 nav justify-content-end margin">
+        {% if not project is null  %}
+            <a href="{{ path('tasks') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Все задачи" ><i class="fa fa-bars fa-3x fa-fw fa-flip"  style="color: #b9a25b; --fa-animation-duration: 3s;" aria-hidden="true"></i></a>
+            <a href="{{ path('my_tasks') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Мои задачи" ><i class="fa fa-tasks fa-3x fa-fw fa-flip"  style="color: #b9a25b; --fa-animation-duration: 3s;" aria-hidden="true"></i></a>
+                <a href="{{ path('creat_task') }}" class="plus radius" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-title="Создать задачу"></a>
+            <a href="{{ path('app_edit', {'id':app.user.id}) }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Редактировать пользователя"><i class="fa fa-cog fa-spin fa-3x fa-fw" style="color: #b9a25b;"></i></a>
+            <a href="{{ path('app_add_man') }} " class="man" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Зарегистрировать пользователя в проектe"></a>
+            <a href="{{ path('search_man', {'id':project.id}) }} "  data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Добавить пользователя в проект"><i class="fa fa-user-plus fa-3x fa-fw" style="color: #b9a25b; --fa-animation-duration: 3s;" aria-hidden="true"></i></a>
+        {% endif %}
+            <p class="fs-10 avtorization">Вы авторизованы под {{ app.user.userIdentifier }},</p>
+             <a class="btn btn-danger gold" style="padding-top: 10px;" href="{{ path('app_logout') }}">Logout</a>
+        </div>
+
+    {% endif %}
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Задача</th>
+            <th>Назначена</th>
+            <th>Приоритет</th>
+            <th>Трудозатраты</th>
+            <th>Состояние</th>
+            <th>Действия</th>
+        </tr>
+        {% for task in tasks %}
+            {% if not project is null  %}
+            {% if task.project.id == project.id %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{  task.assignedusername }}</td>
+                <td>
+                    {% if task.priority == 'high' %}
+                        {{ 'Высокий' }}
+                    {% endif %}
+
+                    {% if task.priority == 'medium' %}
+                        {{ 'Средний' }}
+                    {% endif %}
+
+                    {% if task.priority == 'low' %}
+                        {{ 'Низкий' }}
+                    {% endif %}
+                </td>
+                <td>{{ task.getHoursAll }}</td>
+                <td>
+                    {% if task.state == 'backlog' %}
+                        <div class="status-circle-grey" ></div>
+                        {{ 'Бэклог' }}
+                    {% endif %}
+
+                    {% if task.state == 'inprogress' %}
+                        <div   class="status-circle-blue"></div>
+                        {{ 'В работе' }}
+                    {% endif %}
+
+                    {% if task.state == 'test' %}
+                        <div   class="status-circle-blue"></div>
+                        {{ 'Тестирование' }}
+                    {% endif %}
+                    {% if task.state == 'dev' %}
+                        <div   class="status-circle-green"></div>
+                        {{ 'Ready for dev' }}
+                    {% endif %}
+                    {% if task.state == 'deploy' %}
+                        <div   class="status-circle-green"></div>
+                        {{ 'Ready for deploy' }}
+                    {% endif %}
+                    {% if task.state == 'finished' %}
+                        <div   class="status-circle-blue"></div>
+                        {{ 'Готово' }}
+                    {% endif %}
+                </td>
+                <td class="buttons">
+                    <a href="{{ path('task_detail', {'id':task.id}) }}" class="btn-view" style="text-decoration: none;">Посмотреть</a>
+                    {% if not user is null  %}
+                        <a href="{{ path('task_edit', {'id':task.id}) }}" class="btn-edit" style="text-decoration: none;">Редактировать</a>
+                        <a href="{{ path('task_delete', {'id':task.id}) }}" onclick="return confirm('¿Вы уверены, что хотите удалить эту запись?')" class="btn-delete" style="text-decoration: none;">Удалить</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+
+    </table>
+{% else %}
+    <strong>Этому пользователю не назначено ни одной задачи</strong>
+{% endif %}

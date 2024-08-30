@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block title %}Все задачи{% endblock %}
+{% block body %}
+<div class="example-wrapper">
+{% if(hours|length >= 1) %}
+
+    {% if app.user %}
+        <div class="mb-3 nav justify-content-end margin" style="margin-top: 0px;">
+            <a href="{{ path('tasks') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Все задачи" ><i class="fa fa-bars fa-3x fa-fw fa-flip"  style="color: #b9a25b; --fa-animation-duration: 3s;" aria-hidden="true"></i></a>
+            <a href="{{ path('my_tasks') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Мои задачи" ><i class="fa fa-tasks fa-3x fa-fw fa-flip"  style="color: #b9a25b; --fa-animation-duration: 3s;" aria-hidden="true"></i></a>
+            <a href="{{ path('creat_task') }}" class="plus radius" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Создать задачу"></a>
+            <a href="{{ path('app_edit', {'id':app.user.id}) }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Редактировать пользователя"><i class="fa fa-cog fa-spin fa-3x fa-fw" style="color: #b9a25b;"></i></a>
+            <a href="{{ path('app_add_man') }} " class="man" data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-custom-class="custom-tooltip"
+               data-bs-title="Зарегистрировать пользователя в проектe"></a>
+            <p class="fs-10 avtorization">Вы авторизованы под {{ app.user.userIdentifier }},</p>
+            <a class="btn btn-danger gold" style="padding-top: 10px;" href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>Дата</th>
+            <th>Пользователь</th>
+            <th>Деятельность</th>
+            <th>Задача</th>
+            <th>Часов</th>
+            <th>Действия</th>
+        </tr>
+        {% for hour in hours %}
+                <tr>
+                    <td>{{ hour.dateString }}</td>
+                    <td>{{ hour.user.name }} {{ hour.user.surname }}</td>
+                    <td>
+                        {% if hour.title == 'test' %}
+                            {{ 'Тестирование' }}
+                        {% endif %}
+                        {% if hour.title == 'dev' %}
+                            {{ 'Разработка' }}
+                        {% endif %}
+                        {% if hour.title == 'post' %}
+                            {{ 'Постановка задачи' }}
+                        {% endif %}
+                        {% if hour.title == 'admin' %}
+                            {{ 'Администрирование' }}
+                        {% endif %}
+                        {% if hour.title == 'mit' %}
+                            {{ 'Совещание' }}
+                        {% endif %}
+                        {% if hour.title == 'review' %}
+                            {{ 'Ревью кода' }}
+                        {% endif %}
+                        {% if hour.title == 'doc' %}
+                            {{ 'Работа с документацией' }}
+                        {% endif %}
+                    </td>
+                    <td>Задача {{  hour.task.id  }} : {{  hour.task.title  }}</td>
+                    <td>{{ hour.hours }}</td>
+                    <td class="buttons">
+                        {% if not hour is null  %}
+                            <a href="{{ path('edit_hours', {'id':hour.id}) }}" class="btn-edit" style="text-decoration: none;">Редактировать</a>
+                            <a href="{{ path('delete_hours', {'id':hour.id}) }}" onclick="return confirm('¿Вы уверены, что хотите удалить эту запись?')" class="btn-delete" style="text-decoration: none;">Удалить</a>
+                        {% endif %}
+                    </td>
+                </tr>
+        {% endfor %}
+
+    </table>
+{% else %}
+    <strong>Трудозатрат нет</strong>
+{% endif %}
+
+
+</div>
+{% endblock %}

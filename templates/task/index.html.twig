@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Все задачи{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="example-wrapper">
+    <div class="mb-3 nav justify-content-start">
+        {% if not project is null  %}
+        <h2>Проект: <a href="{{ path('detail_project', {'id':project.id}) }}" style="text-decoration: none;">{{ project.projectName }}</a></h2>
+        {% endif %}
+        <h2>&emsp;Все задачи: ( {{ count_task }} найденно задач)</h2>
+
+    </div>
+        {% for message in app.flashes('message') %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ include('includes/task-list.html.twig') }}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% if registerMan is defined %}
+    <h1 style="text-align: center">Регистрация участника</h1>
+    {% else %}
+    <h1 style="text-align: center">Регистрация</h1>
+    {% endif %}
+    <div class="authorization__main">
+   <div class="sign-up__container">
+   <div class="container">
+
+    {{ form_errors(registrationForm) }}
+    <div class="form-component">
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Пароль'
+        }) }}
+        {% if registrationForm.projectName is defined %}
+        {{ form_row(registrationForm.projectName) }}
+        {{ form_row(registrationForm.projectDescription) }}
+        {% endif %}
+        {{ form_row(registrationForm.agreeTerms) }}
+        {% if registerMan is defined %}
+            <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+        {% else %}
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        {% endif %}
+
+    {{ form_end(registrationForm) }}
+    </div>
+   </div>
+   </div>
+    </div>
+{% endblock %}

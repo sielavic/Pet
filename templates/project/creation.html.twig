@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Tarea{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper row" style="text-align: center;">
+        {% if edit is defined and edit == true %}
+            <h2>Редактировать проект</h2>
+        {% else %}
+            <h2>Создать проект</h2>
+        {% endif %}
+
+        {{ form_start(form_project) }}
+        {{ form_widget(form_project) }}
+        {{ form_end(form_project) }}
+
+    </div>
+{% endblock %}

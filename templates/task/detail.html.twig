@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle de la Tarea{% endblock %}
+
+{% block body %}
+    <a href="{{ path('task_edit', {'id':task.id}) }}" class="btn-edit" style="float: right;text-decoration: none;">Редактировать</a>
+    <a href="{{ path('creat_hours' , {'id':task.id}) }}" class="btn-edit" style="float: right;margin-right: 4px;text-decoration: none;">Добавить трудозатраты</a>
+    <div class="card" style="width: 92%; margin: auto;margin-top: 10px;">
+    <div class="card-body">
+    <div class="example-wrapper">
+        <p>Задача # {{ task.id }}</p>
+        <h2 class="text-center">{{ task.title }}</h2>
+        <div class=" text-center">
+            {% if parent.id is defined %}
+                <h5>Главная задача <a href="{{ path('task_detail', {'id':parent.id}) }}" class="btn-view">{{ parent.title }}</a> </h5>
+            {% endif %}
+            {% if childrens is not empty %}
+               <h5>Подзадачи:</h5>
+                {% for children in childrens %}
+                    <h5> <a href="{{ path('task_detail', {'id':children.id}) }}" class="btn-view">{{ children.title }}</a> </h5>
+                {% endfor %}
+
+            {% endif %}
+        </div>
+        <p class="data-task text-center">
+            {{ task.assignedUser.surname }}  {{ task.assignedUser.name }} | {{ task.getCreatedAt|date("d/m/Y - h:i") }} |
+            Приоритет ->
+            {% if task.priority == 'high' %}
+                {{ 'Высокий' }}
+            {% endif %}
+
+            {% if task.priority == 'medium' %}
+                {{ 'Средний' }}
+            {% endif %}
+
+            {% if task.priority == 'low' %}
+                {{ 'Низкий' }}
+            {% endif %}
+            | Трудозатраты: <a href="{{ path('detail_hours' , {'id':task.id}) }}" class="btn-edit" style="text-decoration: none;">{{ task.getHoursAll }} ч</a>
+        </p>
+        <div class="d-flex justify-content-center">
+        <div class="spinner-grow spinner-card"  style="display: flex;justify-content: center;" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+        </div>
+        <p class="text-center drop-content" style="justify-content: center; display: none; margin-top: 10px;">{{ task.content }}</p>
+
+    </div>
+    </div>
+    </div>
+{% endblock %}

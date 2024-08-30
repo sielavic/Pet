@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crear Tarea{% endblock %}
+
+{% block body %}
+<div class="card" style="width: 92%; margin: auto;margin-top: 10px;">
+    <div class="card-body">
+    <div class="example-wrapper row" style="text-align: center;">
+        {% if edit is defined and edit == true %}
+            <h2>Редактировать задачу</h2>
+        {% else %}
+            <h2>Создать задачу</h2>
+        {% endif %}
+
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+    </div>
+    </div>
+{% endblock %}
+
+
